@@ -1,18 +1,18 @@
 import React from 'react';
 
-const FormAddPlayer = ({onCreate}) => {
+const FormAddPlayer = ({createPlayer}) => {
 
     let _firstName, _lastName, _position, _number;
 
     const handleSubmit = e => {
         e.preventDefault();
-        onCreate({
+        createPlayer({
             firstName: _firstName.value,
             lastName: _lastName.value,
             position: _position.value,
             number: _number.value
         });
-        _firstName.value = '', _lastName.value = '', _position.value='', _number.value=''
+        _firstName.value = '', _lastName.value = '', _position.value='', _number.value='';
     };
 
     return(

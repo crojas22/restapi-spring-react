@@ -33,13 +33,13 @@ public class EventHandler {
     @HandleAfterDelete
     public void deleteEmployee(Player player) {
         this.websocket.convertAndSend(
-                MESSAGE_PREFIX + "/deleteEmployee", getPath(player));
+                MESSAGE_PREFIX + "/deletePlayer", getPath(player));
     }
 
     @HandleAfterSave
     public void updateEmployee(Player player) {
         this.websocket.convertAndSend(
-                MESSAGE_PREFIX + "/updateEmployee", getPath(player));
+                MESSAGE_PREFIX + "/updatePlayer", getPath(player));
     }
 
     private String getPath(Player player) {

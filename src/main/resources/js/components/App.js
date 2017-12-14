@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Home from './Home';
-import { getPlayers, addPlayer } from "../api";
+import { getPlayersApi, addPlayerApi } from "../api";
+import { register} from "../api/websocket";
 
 class App extends Component {
     constructor() {
@@ -11,17 +12,23 @@ class App extends Component {
     }
 
     componentDidMount() {
-        getPlayers().then(resp => {
+        this.getPlayers();
+
+        register([
+            {route: '/topic/newPlayer', callback: this.getPlayers}
+        ]);
+    }
+
+    getPlayers = () => {
+        getPlayersApi().then(resp => {
             this.setState({
                 players: resp.data._embedded.players
             })
         });
-    }
+    };
 
-    onCreate = newPlayer => {
-        addPlayer(newPlayer).then(resp => {
-            console.log(resp);
-        })
+    createPlayers = newPlayer => {
+        addPlayerApi(newPlayer)
     };
 
 
@@ -29,7 +36,7 @@ class App extends Component {
 
         return(
             <div>
-                <Home {...this.state} onCreate={this.onCreate}/>
+                <Home {...this.state} createPlayer={this.createPlayers}/>
             </div>
         )
 

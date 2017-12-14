@@ -9,7 +9,7 @@ const Home = props => {
 
     return(
         <div>
-            <FormAddPlayer onCreate={props.onCreate}/>
+            <FormAddPlayer createPlayer={props.createPlayer}/>
             <ul>
                 {
                     players

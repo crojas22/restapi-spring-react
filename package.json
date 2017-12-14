@@ -12,7 +12,9 @@
   "dependencies": {
     "axios": "^0.17.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "sockjs-client": "^1.1.4",
+    "stompjs": "^2.3.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
