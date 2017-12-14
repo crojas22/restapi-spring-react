@@ -15,4 +15,11 @@ export const addPlayerApi = newPlayer => {
     })
 };
 
+export const navPlayersApi = page => {
+    return axios({
+        url: page,
+        method: 'get'
+    })
+};
+
 
