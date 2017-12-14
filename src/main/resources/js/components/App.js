@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Home from './Home';
-import { getEmployees } from "../api";
+import { getPlayers, addPlayer } from "../api";
 
 class App extends Component {
     constructor() {
@@ -11,20 +11,25 @@ class App extends Component {
     }
 
     componentDidMount() {
-        getEmployees().then(resp => {
-            console.log(resp)
+        getPlayers().then(resp => {
             this.setState({
                 players: resp.data._embedded.players
             })
-        })
+        });
     }
+
+    onCreate = newPlayer => {
+        addPlayer(newPlayer).then(resp => {
+            console.log(resp);
+        })
+    };
 
 
     render() {
 
         return(
             <div>
-                <Home {...this.state}/>
+                <Home {...this.state} onCreate={this.onCreate}/>
             </div>
         )
 

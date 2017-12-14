@@ -29,8 +29,6 @@ public class RestapiReactApplication implements CommandLineRunner{
 		this.playerRepository.save(new Player("Cesar", "Rojas", "shortstop", 21));
         this.playerRepository.save(new Player("Barry", "Bonds", "left field", 24));
         this.playerRepository.save(new Player("Giancarlo", "Stanton", "right field", 30));
-        this.playerRepository.save(new Player("Mark", "Mcwire", "first base", 40));
         this.playerRepository.save(new Player("Babe", "Ruth", "designated hitter", 11));
-        this.playerRepository.save(new Player("Fernando", "Valenzuela", "pitcher", 35));
 	}
 }

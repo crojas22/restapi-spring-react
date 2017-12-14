@@ -1,4 +1,5 @@
 import React from 'react';
+import FormAddPlayer from './layout/FormAddPlayer'
 
 const Home = props => {
 
@@ -8,6 +9,7 @@ const Home = props => {
 
     return(
         <div>
+            <FormAddPlayer onCreate={props.onCreate}/>
             <ul>
                 {
                     players
