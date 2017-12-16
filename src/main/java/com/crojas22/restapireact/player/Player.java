@@ -9,14 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Data
 public class Player extends BaseEntity{
 
     private String firstName, lastName, position;
     private int number;
     @ManyToOne
     private Team team;
-    private String teamName;
 
     protected Player() {
         super();
@@ -28,6 +26,48 @@ public class Player extends BaseEntity{
         this.lastName = lastName;
         this.position = position;
         this.number = number;
+    }
 
+
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

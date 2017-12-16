@@ -1,31 +1,37 @@
 import React, { Component } from 'react';
-import Home from './Home';
-import { getPlayersApi, addPlayerApi, navPlayersApi } from "../api";
+import {getPlayersApi, addPlayerApi, navPlayersApi, getTeamsApi} from "../api";
+import { Route, Switch } from 'react-router-dom';
 import { register} from "../api/websocket";
+import NavBar from "./layout/NavBar";
+import Home from './Home';
+import Players from "./Players";
+
 
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            players: [],
-            links: {},
-            pageData: {}
-        }
-    }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.players !== nextState.players) {
-            return true;
-        }
-        return false
-    }
+    state = {
+        players: [],
+        teams: [],
+        teamsLinks: {},
+        playersLinks: {},
+        pageData: {}
+    };
 
     componentDidMount() {
         this.getPlayers();
+        this.getTeams();
 
         register([
             {route: '/topic/newPlayer', callback: this.getPlayers}
         ]);
+    }
+
+    getTeams = () => {
+        getTeamsApi().then(resp => {
+            this.setState({
+                teams: resp.data._embedded.teams
+            })
+        })
     }
 
     getPlayers = () => {
@@ -35,7 +41,7 @@ class App extends Component {
             } else {
                 this.setState({
                     players: resp.data._embedded.players,
-                    links: resp.data._links,
+                    playersLinks: resp.data._links,
                     pageData: resp.data.page,
                 })
 
@@ -50,21 +56,22 @@ class App extends Component {
             console.log(resp)
             this.setState({
                 players: resp.data._embedded.players,
-                links: resp.data._links,
+                playersLinks: resp.data._links,
                 pageData: resp.data.page
             })
         })
     };
 
-
     render() {
-
         return(
             <div>
-                <Home {...this.state} createPlayer={this.createPlayers} navigate={this.navigate}/>
+                <NavBar/>
+                <Switch>
+                    <Route exact path='/' component={Home}/>
+                    <Route exact path='/players' render={() => (<Players {...this.state} createPlayer={this.createPlayers} navigate={this.navigate}/>)}/>
+                </Switch>
             </div>
         )
-
     }
 }
 

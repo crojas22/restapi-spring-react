@@ -22,6 +22,13 @@ export const navPlayersApi = page => {
     })
 };
 
+export const getTeamsApi = () => {
+    return axios ({
+        url: '/api/v1/teams',
+        method: 'get'
+    })
+}
+
 
 
 

@@ -35,6 +35,13 @@ const FormAddPlayer = ({createPlayer}) => {
                     <label htmlFor="number">Jersey Number: </label>
                     <input ref={input => _number = input} id="number" type="text" name="number"/>
                 </div>
+                <div>
+                    <label htmlFor="teams">Select team</label>
+                    <select id="teams" required>
+                        <option disabled value="Teams"></option>
+                        <option>Yankees</option>
+                    </select>
+                </div>
                 <input type="submit" value="Add Player"/>
             </fieldset>
         </form>

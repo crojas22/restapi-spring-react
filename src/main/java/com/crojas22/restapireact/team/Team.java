@@ -33,7 +33,6 @@ public class Team extends BaseEntity{
 
     public void addPlayer(Player player) {
         player.setTeam(this);
-        player.setTeamName(this.getName());
         players.add(player);
     }
 }
