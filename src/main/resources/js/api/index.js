@@ -9,7 +9,7 @@ export const getPlayersApi = () => {
 
 export const addPlayerApi = newPlayer => {
     return axios ({
-        url: 'http://localhost:8080/api/v1/players',
+        url: '/api/v1/players',
         method: 'post',
         data: newPlayer
     })
@@ -21,5 +21,7 @@ export const navPlayersApi = page => {
         method: 'get'
     })
 };
+
+
 
 

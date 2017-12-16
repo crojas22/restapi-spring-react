@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface PlayerRepository extends PagingAndSortingRepository<Player, Long> {
-
+    List<Player> findPlayersByOrderByIdDesc();
 }

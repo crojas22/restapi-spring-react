@@ -8,8 +8,16 @@ class App extends Component {
         super();
         this.state = {
             players: [],
-            links: {}
+            links: {},
+            pageData: {}
         }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.players !== nextState.players) {
+            return true;
+        }
+        return false
     }
 
     componentDidMount() {
@@ -22,10 +30,16 @@ class App extends Component {
 
     getPlayers = () => {
         getPlayersApi().then(resp => {
-            this.setState({
-                players: resp.data._embedded.players,
-                links: resp.data._links
-            })
+            if (resp.data._links.last !== undefined) {
+                this.navigate(resp.data._links.last.href)
+            } else {
+                this.setState({
+                    players: resp.data._embedded.players,
+                    links: resp.data._links,
+                    pageData: resp.data.page,
+                })
+
+            }
         });
     };
 
@@ -33,9 +47,11 @@ class App extends Component {
 
     navigate = navUri => {
         navPlayersApi(navUri).then(resp => {
+            console.log(resp)
             this.setState({
                 players: resp.data._embedded.players,
-                links: resp.data._links
+                links: resp.data._links,
+                pageData: resp.data.page
             })
         })
     };
