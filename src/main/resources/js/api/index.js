@@ -27,7 +27,14 @@ export const getTeamsApi = () => {
         url: '/api/v1/teams',
         method: 'get'
     })
-}
+};
+
+export const deletePlayerApi = page => {
+    return axios ({
+        url: page,
+        method: 'delete'
+    })
+};
 
 
 

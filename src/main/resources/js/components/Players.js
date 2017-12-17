@@ -1,10 +1,19 @@
 import React from 'react';
 import FormAddPlayer from "./layout/FormAddPlayer";
 
-const Players = ({ createPlayer, navigate, playersLinks, players, teams }) => {
+const Players = ({ createPlayer, deletePlayers, navigate, playersLinks, players, teams }) => {
 
     const allPlayers = players.map(({firstName, lastName, _links}, index) => {
-        return <li key={index}><a href={_links.player.href}>{firstName} {lastName}</a></li>
+        return(
+            <li key={index}>
+                <a href={_links.player.href}>
+                    {firstName} {lastName}
+                </a>
+                <button onClick={() => deletePlayers(_links.player.href)}>
+                    delete
+                </button>
+            </li>
+        )
     });
 
     const navLinks = [];
