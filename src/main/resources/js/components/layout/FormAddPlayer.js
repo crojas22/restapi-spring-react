@@ -1,19 +1,26 @@
 import React from 'react';
 
-const FormAddPlayer = ({createPlayer}) => {
+const FormAddPlayer = ({createPlayer, teams}) => {
 
-    let _firstName, _lastName, _position, _number;
+    let _firstName, _lastName, _position, _number, _team;
 
     const handleSubmit = e => {
+
+        let selected = _team.options[_team.selectedIndex];
+
         e.preventDefault();
         createPlayer({
             firstName: _firstName.value,
             lastName: _lastName.value,
             position: _position.value,
-            number: _number.value
+            number: _number.value,
+            team: selected.getAttribute('data')
         });
+
         _firstName.value = '', _lastName.value = '', _position.value='', _number.value='';
     };
+
+    const allTeams = teams.map((each, index) => <option key={index} data={each._links.self.href}>{each.name}</option>);
 
     return(
         <form onSubmit={handleSubmit}>
@@ -37,9 +44,11 @@ const FormAddPlayer = ({createPlayer}) => {
                 </div>
                 <div>
                     <label htmlFor="teams">Select team</label>
-                    <select id="teams" required>
-                        <option disabled value="Teams"></option>
-                        <option>Yankees</option>
+                    <select id="teams" ref={input => _team = input} required>
+                        <option defaultChecked></option>
+                        {
+                            allTeams
+                        }
                     </select>
                 </div>
                 <input type="submit" value="Add Player"/>

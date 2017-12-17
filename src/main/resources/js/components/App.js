@@ -32,11 +32,12 @@ class App extends Component {
                 teams: resp.data._embedded.teams
             })
         })
-    }
+    };
 
     getPlayers = () => {
         getPlayersApi().then(resp => {
-            if (resp.data._links.last !== undefined) {
+            console.log(resp);
+            if (resp.data._links.last !== undefined && resp.data.page.totalElements > this.state.pageData.totalElements) {
                 this.navigate(resp.data._links.last.href)
             } else {
                 this.setState({
@@ -53,7 +54,6 @@ class App extends Component {
 
     navigate = navUri => {
         navPlayersApi(navUri).then(resp => {
-            console.log(resp)
             this.setState({
                 players: resp.data._embedded.players,
                 playersLinks: resp.data._links,
