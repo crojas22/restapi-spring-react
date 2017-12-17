@@ -5,6 +5,7 @@ import { register} from "../api/websocket";
 import NavBar from "./layout/NavBar";
 import Home from './Home';
 import Players from "./Players";
+import Teams from "./Teams";
 
 
 class App extends Component {
@@ -69,6 +70,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route exact path='/players' render={() => (<Players {...this.state} createPlayer={this.createPlayers} navigate={this.navigate}/>)}/>
+                    <Route exact path='/teams' render={() => (<Teams {...this.state} />)}/>
                 </Switch>
             </div>
         )
